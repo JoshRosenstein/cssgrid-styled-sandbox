@@ -11,13 +11,17 @@ import {
   propTypes,
   alignSelf,
   zIndex,
-  order
+  order,
+  width,
+  space,
+  fontSize,
+  color
 } from 'styled-system'
 import PropTypes from 'prop-types'
-import { Box } from 'grid-styled'
+import Box from './Box'
+import CleanDiv from './CleanDiv'
 
 const numberOrString = PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-
 //BOX hass:
 // width,
 //   space,
@@ -102,6 +106,10 @@ export const justifyItems = style({
 const Grid = Box.extend(
   [],
   { display: 'grid' },
+  width,
+  space,
+  fontSize,
+  color,
   minWidth,
   maxWidth,
 
@@ -165,7 +173,7 @@ Grid.propTypes = {
 
   ...propTypes.justifyContent,
   ...propTypes.alignContent,
-  justifyItems,
+  justifyItems: numberOrString,
   ...propTypes.alignItems
 }
 
@@ -211,6 +219,11 @@ export const justify = style({
 
 Grid.Item = Box.extend(
   [],
+  width,
+  space,
+  fontSize,
+  color,
+
   minWidth,
   maxWidth,
 
