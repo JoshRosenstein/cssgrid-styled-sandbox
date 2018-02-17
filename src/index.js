@@ -2,8 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'
 import styled, { injectGlobal } from 'styled-components'
-import { Page1, Page2, Page3, Page4 } from './pages'
-//import styles from './styles'
+import { Page1, Page2, Page3, Page4, Playground } from './pages'
 
 injectGlobal`
   body {

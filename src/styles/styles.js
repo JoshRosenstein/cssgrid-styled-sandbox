@@ -94,25 +94,28 @@ export const grid = style({
   cssProperty: 'grid'
 })
 
-export const rowGap = style({
+export const rowGap = responsiveStyle({
   prop: 'rowGap',
-  cssProperty: 'gridRowGap'
+  cssProperty: 'gridRowGap',
+  key: 'space'
 })
 
-export const columnGap = style({
+export const columnGap = responsiveStyle({
   prop: 'columnGap',
-  cssProperty: 'gridColumnGap'
+  cssProperty: 'gridColumnGap',
+  key: 'space'
 })
 
-export const gap = style({
+export const gap = responsiveStyle({
   prop: 'gap',
-  cssProperty: 'gridGap'
+  cssProperty: 'gridGap',
+  key: 'space'
 })
 
 export const justifyItems = style({
   prop: 'justifyItems'
 })
-
+//flex-start | flex-end | center | space-between | space-around | space-evenly
 export const overflow = props => ({
   ...oflow(props),
   ...oflowX(props),
