@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import Grid from '../Grid'
+import { Grid, GridItem } from '../components'
+
 import { backgroundImage } from 'styled-system'
 
 const Wrapper = styled.div`
@@ -9,8 +10,7 @@ const Wrapper = styled.div`
   background: no-repeat
     url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/12005/grid.png);
 `
-
-const Item = styled(Grid.Item)`
+const Item = styled(GridItem)`
   background-color: rgba(68, 68, 68, 0.1);
   border: 2px solid rgba(68, 68, 68, 0.3);
   color: #6a5acd;

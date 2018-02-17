@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import Grid from '../Grid'
+import { Grid, GridItem } from '../components'
 
-const Item = styled(Grid.Item)`
+const Item = styled(GridItem)`
   background-color: rgba(68, 68, 68, 0.1);
   border: 2px solid rgba(68, 68, 68, 0.3);
   color: #6a5acd;

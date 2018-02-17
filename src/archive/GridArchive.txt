@@ -1,0 +1,71 @@
+import {
+  gridContainer,
+  size,
+  overflow,
+  gridItems,
+  gridItemsProps
+} from './styles/styles'
+import styled from 'styled-components'
+import system from './system'
+import styles from './styles'
+import { propTypes, width, space } from './styles'
+
+import PropTypes from 'prop-types'
+//import Box from './CleanBox'
+import Box from './Box'
+import CleanDiv from './CleanDiv'
+
+const dict = Object.keys(styles)
+  .map(key => ({
+    key,
+    propNames: Object.keys(styles[key].propTypes || {})
+  }))
+  .reduce((acc, b) => {
+    const vals = b.propNames.reduce(
+      (a, name) => ({
+        ...a,
+        [name]: b.key
+      }),
+      {}
+    )
+    return { ...acc, ...vals }
+  }, {})
+console.log(dict)
+const numberOrString = PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+//BOX hass:
+// width,
+//   space,
+//   fontSize,
+//   color,
+//   flex,
+//   order
+
+
+const Grid = system('width',
+  'space',
+  'fontSize',
+  'color', 'size', 'overflow', 'gridContainer', { display: 'grid' })
+
+// const Grid = Box.extend([], size, overflow, gridContainer)
+
+// Grid.displayName = 'Grid'
+// Grid.defaultProps = {
+//   display: 'grid'
+// }
+// Grid.propTypes = {
+//   ...propTypes.size,
+//   ...propTypes.overflow,
+//   ...propTypes.gridContainer
+// }
+export const GridItem = system('size', 'gridItems')
+
+// Grid.Item = Box.extend([], size, gridItems, width, space)
+// //Grid.Item =styled(Box)([], size, gridItems)
+// Grid.Item.displayName = 'Grid.Item'
+
+// Grid.Item.propTypes = {
+//   ...propTypes.size,
+//   ...propTypes.gridItems
+// }
+
+export default Grid
