@@ -41,7 +41,7 @@ Item.defaultProps = {
 
 const spacing = [2, 3, 4]
 
-const Playground = () => (
+const ColumnsDemo = () => (
   <Fragment>
     <h3>width</h3>
 
@@ -69,4 +69,4 @@ const Playground = () => (
   </Fragment>
 )
 
-export default Playground
+export default ColumnsDemo

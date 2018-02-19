@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled, { injectGlobal } from 'styled-components'
-import { Columns, GridItem, Box } from '../components'
+import { Flex, GridItem } from '../components'
 import { space } from 'styled-system'
 import theme from '../theme'
 
@@ -27,6 +27,7 @@ injectGlobal`
     font: inherit;
   }
 `
+
 const Item = styled.div`
   ${space} display: flex;
   justify-content: center;
@@ -38,35 +39,35 @@ Item.defaultProps = {
   px: '1rem',
   theme: theme
 }
+// mobileSm: '100%',
+//   tabletSm: '50%',
+//     laptopSm: '33.333%'
 
+const itemBasis = ['100%', '50%', '33.33%']
 const spacing = [2, 3, 4]
-
-const Playground = () => (
+const FlexDemo = () => (
   <Fragment>
     <h3>width</h3>
-
-    <Columns columnWidth={200} gap={spacing}>
-      <Item />
-      <Item />
-      <Item />
-    </Columns>
+    <Flex wrap gapType="padding" gap={spacing}>
+      <Flex.Item width={itemBasis}>
+        <Item>1</Item>
+      </Flex.Item>
+      <Flex.Item width={itemBasis}>
+        <Item>2</Item>
+      </Flex.Item>
+      <Flex.Item width={itemBasis}>
+        <Item>3</Item>
+      </Flex.Item>
+    </Flex>
 
     <br />
     <br />
-
-    <h3>count</h3>
-    <Columns columnCount={[1, 2, 3]} gap={spacing}>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-    </Columns>
+    <Flex column middle right height={200}>
+      <Flex.Item>
+        <Item>Lorem ipsum</Item>
+      </Flex.Item>
+    </Flex>
   </Fragment>
 )
 
-export default Playground
+export default FlexDemo

@@ -8,6 +8,9 @@
   "main": "src/index.js",
   "dependencies": {
     "clean-element": "1.0.0",
+    "clean-tag": "1.0.2",
+    "html-tags": "2.0.0",
+    "ramda": "0.25.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-json-tree": "0.11.0",

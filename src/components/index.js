@@ -1,2 +1,3 @@
-export { Grid, GridItem } from './Grid'
-export { Flex } from './Flex'
+export Grid from './Grid'
+export Flex from './Flex'
+export Columns from './Columns'

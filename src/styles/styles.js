@@ -17,11 +17,22 @@ import {
   style,
   pseudoStyle,
   responsiveStyle,
-  display
+  display,
+  flex,
+  flexDirection,
+  flexWrap,
+  util
 } from 'styled-system'
 
 import PropTypes from 'prop-types'
-
+const pt = {
+  responsive: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.array
+  ]),
+  numberOrString: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+}
 export const size = props => ({
   ...minWidth(props),
   ...maxWidth(props),
@@ -54,22 +65,22 @@ export const oflowY = style({
   cssProperty: 'overflowY'
 })
 
-export const templateRows = style({
+export const templateRows = responsiveStyle({
   prop: 'templateRows',
   cssProperty: 'gridTemplateRows'
 })
 
-export const templateColumns = style({
+export const templateColumns = responsiveStyle({
   prop: 'templateColumns',
   cssProperty: 'gridTemplateColumns'
 })
 
-export const templateAreas = style({
+export const templateAreas = responsiveStyle({
   prop: 'templateAreas',
   cssProperty: 'gridTemplateAreas'
 })
 
-export const template = style({
+export const template = responsiveStyle({
   prop: 'template',
   cssProperty: 'gridTemplate'
 })
@@ -106,10 +117,11 @@ export const columnGap = responsiveStyle({
   key: 'space'
 })
 
-export const gap = responsiveStyle({
-  prop: 'gap',
-  cssProperty: 'gridGap',
-  key: 'space'
+export const gridGap = responsiveStyle({
+  prop: 'gridGap',
+  alias: 'gap',
+  key: 'space',
+  numberToPx: true
 })
 
 export const justifyItems = style({
@@ -128,28 +140,27 @@ export const overflowProps = {
   ...oflowY.propTypes
 }
 overflow.propTypes = overflowProps
-
+//TODO: responsive styles dont work correctly when combining them like this
 export const gridContainer = props => ({
   ...display(props),
   ...templateRows(props),
   ...templateColumns(props),
   ...templateAreas(props),
 
-  ...template(props),
   ...autoRows(props),
   ...autoColumns(props),
   ...autoFlow(props),
   ...grid(props),
   ...rowGap(props),
-  ...columnGap(props),
-  ...gap(props),
+
+  ...template(props),
   ...justifyContent(props),
   ...alignContent(props),
   ...justifyItems(props),
   ...alignItems(props)
 })
 
-export const gridContainerProps = {
+const gridContainerProps = {
   ...display.propTypes,
   ...templateRows.propTypes,
   ...templateColumns.propTypes,
@@ -161,8 +172,7 @@ export const gridContainerProps = {
   ...autoFlow.propTypes,
   ...grid.propTypes,
   ...rowGap.propTypes,
-  ...columnGap.propTypes,
-  ...gap.propTypes,
+
   ...justifyContent.propTypes,
   ...alignContent.propTypes,
   ...justifyItems.propTypes,
@@ -228,18 +238,18 @@ export const gridItems = props => ({
   ...column(props),
   ...area(props),
   ...justify(props),
-  ...alignSelf(props),
   ...zIndex(props),
   ...order(props),
-  ...gap(props),
+  ...gridGap(props),
   ...justifyContent(props),
   ...alignContent(props),
   ...justifyItems(props),
   ...alignItems(props),
-  ...gridPoistion(props)
+  ...gridPoistion(props),
+  ...alignSelf(props)
 })
 
-export const gridItemsProps = {
+const gridItemsProps = {
   ...rowStart.propTypes,
   ...rowEnd.propTypes,
   ...columnStart.propTypes,
@@ -251,7 +261,7 @@ export const gridItemsProps = {
   ...alignSelf.propTypes,
   ...zIndex.propTypes,
   ...order.propTypes,
-  ...gap.propTypes,
+  ...gridGap.propTypes,
   ...justifyContent.propTypes,
   ...alignContent.propTypes,
   ...justifyItems.propTypes,
@@ -265,3 +275,169 @@ export const gridItemsProps = {
 }
 
 gridItems.propTypes = gridItemsProps
+
+const flexColumnShim = n => (n === true ? 'column' : n)
+export const flexColumn = responsiveStyle({
+  prop: 'flexDirection',
+  alias: 'column',
+  getter: flexColumnShim
+})
+
+export const flexFlow = responsiveStyle({
+  prop: 'flexFlow',
+  alias: 'flow'
+})
+
+export const flexGap = responsiveStyle({
+  prop: 'flexGap',
+  alias: 'gap',
+  key: 'space',
+  numberToPx: true,
+  cssProperty: ['marginTop', 'marginLeft']
+})
+
+export const flexGapPadding = responsiveStyle({
+  prop: 'flexGapPadding',
+  alias: 'gap',
+  key: 'space',
+  numberToPx: true,
+  cssProperty: ['paddingTop', 'paddingLeft']
+})
+
+const flexPosition = p => {
+  if (p.column || p.direction === 'column') {
+    return {
+      alignItems: p.center
+        ? 'center'
+        : p.right ? 'flex-end' : p.left ? 'flex-start' : null,
+      justifyContent: p.middle
+        ? 'center'
+        : p.top ? 'flex-start' : p.bottom ? 'flex-end' : null,
+      flexDirection: 'column'
+    }
+  }
+  return {
+    justifyContent: p.center
+      ? 'center'
+      : p.right ? 'flex-end' : p.left ? 'flex-start' : null,
+    alignItems: p.middle
+      ? 'center'
+      : p.top ? 'flex-start' : p.bottom ? 'flex-end' : null
+  }
+}
+
+export const flexContainer = props => ({
+  ...display(props),
+  ...flexDirection(props),
+  ...flexWrap(props),
+  ...flexFlow(props),
+  ...justifyContent(props),
+  ...alignContent(props),
+  ...alignItems(props),
+  ...flexPosition(props)
+})
+const flexContainerProps = {
+  ...display.propTypes,
+  ...flexDirection.propTypes,
+  ...flexWrap.propTypes,
+  ...flexFlow.propTypes,
+  ...justifyContent.propTypes,
+  ...alignContent.propTypes,
+  ...alignItems.propTypes,
+  column: PropTypes.bool,
+  center: PropTypes.bool,
+  middle: PropTypes.bool,
+  top: PropTypes.bool,
+  right: PropTypes.bool,
+  bottom: PropTypes.bool,
+  left: PropTypes.bool,
+  gapType: PropTypes.string,
+  wrap: PropTypes.bool ///Overide
+}
+flexContainer.propTypes = flexContainerProps
+
+export const flexGrow = responsiveStyle({
+  prop: 'flexGrow',
+  alias: 'grow'
+})
+
+export const flexShrink = responsiveStyle({
+  prop: 'flexShrink',
+  alias: 'shrink'
+})
+
+export const flexBasis = responsiveStyle({
+  prop: 'basis',
+  cssProperty: 'flexBasis'
+})
+
+const flexItemPoistion = props =>
+  props.center
+    ? { marginLeft: 'auto', marginRight: 'auto' }
+    : props.middle
+      ? { marginLeft: 'auto', marginRight: 'auto' }
+      : props.top
+        ? { marginBottom: 'auto' }
+        : props.right
+          ? { marginLeft: 'auto' }
+          : props.bottom
+            ? { marginTop: 'auto' }
+            : props.left ? { marginRight: 'auto' } : null
+
+export const flexItem = props => ({
+  ...flexGrow(props),
+  ...flexShrink(props),
+  ...flexBasis(props),
+  ...flex(props),
+  ...zIndex(props),
+  ...alignSelf(props),
+  ...order(props),
+  ...flexItemPoistion(props)
+})
+
+const flexItemProps = {
+  ...flexGrow.propTypes,
+  ...flexShrink.propTypes,
+  ...flexBasis.propTypes,
+  ...flex.propTypes,
+  ...zIndex.propTypes,
+  ...alignSelf.propTypes,
+  ...order.propTypes,
+  center: PropTypes.bool,
+  middle: PropTypes.bool,
+  top: PropTypes.bool,
+  right: PropTypes.bool,
+  bottom: PropTypes.bool,
+  left: PropTypes.bool
+}
+
+flexItem.propTypes = flexItemProps
+
+const columnCounter = n => (util.num(n) ? 100 / n + '%' : null)
+export const columnCount = responsiveStyle({
+  prop: 'columnCount',
+  cssProperty: 'width',
+  getter: columnCounter
+})
+
+const columnCounterGrid = n => (util.num(n) ? 'repeat(' + n + ', 1fr)' : null)
+export const columnCountGrid = responsiveStyle({
+  prop: 'columnCount',
+  cssProperty: 'gridTemplateColumns',
+  getter: columnCounterGrid
+})
+
+export const columnWidth = responsiveStyle({
+  prop: 'columnWidth',
+  cssProperty: 'width',
+  numberToPx: true
+})
+
+const columnWidthrGrid = n =>
+  util.num(n) ? 'repeat(auto-fit,minmax(' + util.px(n) + ', 1fr))' : null
+
+export const columnWidthGrid = responsiveStyle({
+  prop: 'columnWidth',
+  cssProperty: 'gridTemplateColumns',
+  getter: columnWidthrGrid
+})

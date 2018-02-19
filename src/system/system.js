@@ -4,6 +4,7 @@ import styles from '../styles'
 const funcNames = Object.keys(styles)
 const unique = arr => [...new Set(arr)]
 const isPOJO = n => typeof n === 'object' && n !== null && !Array.isArray(n)
+import R from 'ramda'
 
 const dict = Object.keys(styles)
   .map(key => ({
@@ -85,7 +86,7 @@ class System {
 
       const div = props => React.createElement(Tag, props)
       div.defaultProps = {
-        blacklist: Object.keys(propTypes)
+        blacklist: [...Object.keys(propTypes), 'theme']
       }
 
       const Component = createComponent(div)(...funcs)

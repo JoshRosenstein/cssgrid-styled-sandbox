@@ -1,12 +1,8 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { Grid, GridItem } from '../components'
-
-const Item = styled(GridItem)`
-  background-color: rgba(68, 68, 68, 0.1);
-  border: 2px solid rgba(68, 68, 68, 0.3);
-  color: #6a5acd;
-`
+//import { Grid, GridItem } from '../components'
+import { Grid } from '../components'
+import { Item, spacing } from './shared'
 
 const Page3 = () => (
   <Fragment>

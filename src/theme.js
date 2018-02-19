@@ -1,4 +1,6 @@
-const breakpoints = ['40em', '52em', '64em']
+//const breakpoints = ['37em', '64em', '100em']
+
+export const breakpoints = ['40em', '52em', '64em']
 
 const space = [0, 4, 8, 16, 32, 64, 128, 256, 512]
 

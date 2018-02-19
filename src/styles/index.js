@@ -1,8 +1,12 @@
-import { styles as ss } from 'styled-system'
+import { default as ss } from 'styled-system'
+import R from 'ramda'
+delete ss['propTypes']
+//console.log(Object.keys(ss))
 
 import * as myss from './styles'
-
+//console.log(Object.keys(myss))
 const styles = Object.assign(ss, myss)
+//console.log(Object.keys(styles))
 export const propTypes = {}
 
 Object.keys(styles).forEach(key => {
@@ -73,5 +77,32 @@ export {
   borderWidth
 } from 'styled-system'
 
-export { overflow, gridContainer, gridItems } from './styles'
+export {
+  overflow,
+  gridContainer,
+  gridItems,
+  flexContainer,
+  flexItem,
+  flexGap,
+  flexGapPadding,
+  columnCount,
+  columnCountGrid,
+  columnWidthGrid,
+  columnWidth,
+  gridGap
+} from './styles'
+
+export const StyleProps = []
+const GetKey = (idx, obj) => R.keys(obj)[idx]
+//var val2 = (k, i2) => (v, i) => (StyleProps[i2 + i] = { [k]: v })
+//var tt = (value, idx, obj) => mapIndexed(val2(GetKey(idx, obj), idx), value)
+var tt = (value, idx, obj) =>
+  (StyleProps[idx] = { name: GetKey(idx, obj), props: value })
+const styl = R.mapObjIndexed(
+  (num, key, obj) => R.keys(num.propTypes),
+
+  styles
+)
+R.addIndex(R.map)(tt, styl)
+
 export default styles
