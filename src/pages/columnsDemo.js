@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled, { injectGlobal } from 'styled-components'
-import { Columns, GridItem, Box } from '../components'
+import { Columns, GridItem, Box, Spacer } from '../components'
 import { space } from 'styled-system'
 import theme from '../theme'
 
@@ -51,8 +51,7 @@ const ColumnsDemo = () => (
       <Item />
     </Columns>
 
-    <br />
-    <br />
+    <Spacer />
 
     <h3>count</h3>
     <Columns columnCount={[1, 2, 3]} gap={spacing}>

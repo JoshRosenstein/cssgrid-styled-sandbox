@@ -441,3 +441,9 @@ export const columnWidthGrid = responsiveStyle({
   cssProperty: 'gridTemplateColumns',
   getter: columnWidthrGrid
 })
+
+export const spacerX = responsiveStyle({
+  prop: 'columnWidth',
+  cssProperty: ['minWidth', 'width', 'marginLeft'],
+  key: 'space'
+})

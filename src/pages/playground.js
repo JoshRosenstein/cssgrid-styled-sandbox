@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled, { injectGlobal } from 'styled-components'
-import { Columns, GridItem, Box } from '../components'
+import { Break, Grid, Box } from '../components'
 import { space } from 'styled-system'
 import theme from '../theme'
 
@@ -33,6 +33,7 @@ const Item = styled.div`
   align-items: center;
   min-height: 50px;
   background-color: #ddd;
+  flex-wrap: wrap;
 `
 Item.defaultProps = {
   px: '1rem',
@@ -43,29 +44,19 @@ const spacing = [2, 3, 4]
 
 const Playground = () => (
   <Fragment>
-    <h3>width</h3>
-
-    <Columns columnWidth={200} gap={spacing}>
-      <Item />
-      <Item />
-      <Item />
-    </Columns>
-
-    <br />
-    <br />
-
-    <h3>count</h3>
-    <Columns columnCount={[1, 2, 3]} gap={spacing}>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-      <Columns.Item>
-        <Item />
-      </Columns.Item>
-    </Columns>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex fuga quae quam
+      reiciendis assumenda vero, molestias, quasi necessitatibus{' '}
+      <Break max={1} />
+      earum repudiandae architecto error distinctio omnis iure laboriosam
+      <Break min={500} />
+      tempora nemo similique! Aliquam.
+    </p>
+    <Break min={1} />
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex fuga quae quam
+      reiciendis assumenda vero, molestias, quasi necessitatibus
+    </p>
   </Fragment>
 )
 

@@ -10,7 +10,8 @@ import {
   Playground,
   styleLookup,
   FlexDemo,
-  ColumnsDemo
+  ColumnsDemo,
+  SpacerDemo
 } from './pages'
 import { Grid } from './components'
 import { space, color } from './styles'
@@ -115,6 +116,7 @@ const App = () => (
               <Link to="/stylelookup">Styles</Link>
               <Link to="/flexdemo">Flex</Link>
               <Link to="/columns">Columns</Link>
+              <Link to="/spacer">Spacer</Link>
               <Link to="/dev">Dev</Link>
             </nav>
           </Grid.Item>
@@ -128,6 +130,7 @@ const App = () => (
               <Route path="/stylelookup" exact component={styleLookup} />
               <Route path="/flexdemo" exact component={FlexDemo} />
               <Route path="/columns" exact component={ColumnsDemo} />
+              <Route path="/spacer" exact component={SpacerDemo} />
               <Route path="/dev" exact component={Playground} />
             </Switch>
           </Grid.Item>

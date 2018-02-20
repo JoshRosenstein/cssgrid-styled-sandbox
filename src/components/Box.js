@@ -1,32 +1,42 @@
 import styled from 'styled-components'
-import { space, width, flex, color, fontSize, order } from 'styled-system'
+import {
+  space,
+  size,
+  flex,
+  color,
+  fontSize,
+  order,
+  display
+} from 'styled-system'
 import tag from 'clean-tag'
 import theme from '../theme'
 
 const Box = styled(tag)(
   [],
   { boxSizing: 'border-box' },
-  width,
+  size,
   space,
   fontSize,
   color,
   flex,
-  order
+  order,
+  display
 )
 
 Box.displayName = 'Box'
 
 Box.defaultProps = {
-  theme
+  theme: theme
 }
 
 Box.propTypes = {
-  ...width.propTypes,
+  ...size.propTypes,
   ...space.propTypes,
   ...fontSize.propTypes,
   ...color.propTypes,
   ...flex.propTypes,
-  ...order.propTypes
+  ...order.propTypes,
+  ...display.propTypes
 }
 
 export default Box
